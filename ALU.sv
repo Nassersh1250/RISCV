@@ -1,26 +1,25 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/24/2024 02:21:59 PM
-// Design Name: 
-// Module Name: ALU
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module ALU(
-
+    input logic [31:0]op1,op2,
+    input logic [3:0]aluctrl,
+    output logic [31:0] result,
+    output logic zero
     );
+    
+    always@(*) begin 
+        case(aluctrl) 
+            4'b0000: result = op1+op2;
+            4'b0001: result = op1-op2;
+            4'b0010: result = op1&op2;
+            4'b0011: result = op1|op2;
+            4'b0100: result = op1^op2;
+            4'b0101: result = op1<<op2;
+            4'b0110: result = op1>>op2;
+            4'b0111: result = op1>>>op2;
+            4'b1000: result = $signed(op1)<$signed(op2);
+            4'b1001: result = $unsigned(op1)<$unsigned(op2);
+            default result = 0;
+            endcase;
+         end
 endmodule

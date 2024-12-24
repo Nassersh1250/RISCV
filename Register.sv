@@ -1,26 +1,26 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/24/2024 02:07:13 PM
-// Design Name: 
-// Module Name: Register
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module Register(
-
+    input logic clk,resetn,regwrite,
+    input logic [4:0] raddr1,raddr2,waddr,
+    input logic [31:0] wdata,
+    output logic [31:0] rdata1,rdata2
     );
+    
+    logic [31:0]register_Data[0:31];
+    
+    assign register_Data[0] = 0;
+    
+    always@(*) begin 
+        rdata1 = register_Data[raddr1];
+        rdata2 = register_Data[raddr2];
+    end
+    
+    always@(posedge clk or negedge resetn) begin
+        if(!resetn)
+            register_Data = {0};
+        else if (regwrite) begin 
+            register_Data[waddr] <= wdata;
+        end
+    end
 endmodule
