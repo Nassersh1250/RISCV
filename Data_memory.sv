@@ -6,9 +6,7 @@ module Data_memory(
     input logic [1:0] load_type,
     input logic [1:0] store_type,
     input reg [31:0]wdata,
-    output reg [31:0] rdata_word,
-    output reg [15:0] rdata_half,
-    output reg [7:0] rdata_byte
+    output reg [31:0] rdata_word
     );
     
     reg [31:0] dmem[0:1023];
@@ -35,11 +33,9 @@ module Data_memory(
     
     always@(posedge clk or negedge resetn) begin
         if (!resetn) begin 
-            dmem = {0};
+            dmem = '{default: 32'b0};
             wdata = 0;
             rdata_word = 0;
-            rdata_half = 0;
-            rdata_byte = 0;
             
         end
         

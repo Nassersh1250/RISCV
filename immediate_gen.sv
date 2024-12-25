@@ -12,7 +12,6 @@ module immediate_gen(
          7'b0100011: imm = { {20{inst[31]}}, inst[31:25], inst[11:7] }; // S-type
          7'b1100011: imm = { {20{inst[31]}},  inst[31:25], inst[11:7]}; // B-type
          default: imm = { {20{inst[31]}}, inst[31:20] }; // Default case for unsupported instructions
-        endcase
-        
+        endcase 
     end
 endmodule
