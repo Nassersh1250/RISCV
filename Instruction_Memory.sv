@@ -10,7 +10,7 @@ module Instruction_Memory(
     
    initial $readmemh("/home/it/Desktop/CX204/Lab6/machine.hex",memory);
    always@(*) begin
-    instruction = memory[address];
+    instruction = memory[address[31:2]];
    end
    
    endmodule

@@ -18,7 +18,10 @@ module Register(
     
     always@(posedge clk or negedge resetn) begin
         if(!resetn)
-            register_Data = {0};
+             register_Data = '{32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 
+                         32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 
+                         32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 
+                         32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 32'b0};
         else if (regwrite) begin 
             register_Data[waddr] <= wdata;
         end

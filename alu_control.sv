@@ -12,7 +12,7 @@ module alu_control (
             2'b00: alu_ctrl = 4'b0000; // ADD for I-type and Load/Store address calculation
             2'b01: alu_ctrl = 4'b1000; // SUB for Branch instructions
             2'b10: begin
-                case ({fun7, fun3})
+                case ({fun7[5], fun3})
                     4'b0000: alu_ctrl = 4'b0000; // ADD
                     4'b1000: alu_ctrl = 4'b1000; // SUB
                     4'b0001: alu_ctrl = 4'b0001; // SLL (Shift Left Logical)
