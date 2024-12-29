@@ -4,15 +4,27 @@
 module RISCV_top(
     input logic clk,resetn
     );
-    logic [31:0]next_pc,current_pc,instruction,wdata,rdata1,rdata2,imm,alu_out,romout;
-    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero,Upper_imm;
+    logic [31:0]next_pc,current_pc,instruction,wdata,rdata1,rdata2,imm,alu_out,romout,pc_jump;
+    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero,pc_sel;
     logic [1:0] alu_op;
     logic [6:0] opcode;
     logic [3:0] alu_ctrl;
     
-    ALU ALU_PC(.op1(current_pc), .op2(4), .aluctrl(4'b0000), .result(next_pc));
+    ALU ALU_PC(
+    .op1(current_pc),
+    .op2(4),
+    .aluctrl(4'b0000),
+    .result(next_pc));
     
-    Program_Counter PC(.*);
+    ALU ALU_PC2(
+        .op1(current_pc),
+        .op2(imm),
+        .aluctrl(4'b0000),
+        .result(pc_jump));
+    
+    Program_Counter PC(
+        .*,
+        .next_pc(pc_sel?pc_jump:next_pc));
     
     Instruction_Memory IM(.address(current_pc), .instruction(instruction));
     assign opcode = instruction[6:0];
