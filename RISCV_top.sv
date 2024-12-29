@@ -5,7 +5,7 @@ module RISCV_top(
     input logic clk,resetn
     );
     logic [31:0]next_pc,current_pc,instruction,wdata,rdata1,rdata2,imm,alu_out,romout;
-    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero;
+    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero,Upper_imm;
     logic [1:0] alu_op;
     logic [6:0] opcode;
     logic [3:0] alu_ctrl;
