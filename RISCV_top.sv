@@ -5,7 +5,7 @@ module RISCV_top(
     input logic clk,resetn
     );
     logic [31:0]next_pc,current_pc,instruction,wdata,rdata1,rdata2,imm,alu_out,romout,pc_jump;
-    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero,pc_sel;
+    logic reg_write, mem_write, mem_to_reg, alu_src,branch,zero,pc_sel,less,Upper_imm;
     logic [1:0] alu_op;
     logic [6:0] opcode;
     logic [3:0] alu_ctrl;
@@ -21,6 +21,8 @@ module RISCV_top(
         .op2(imm),
         .aluctrl(4'b0000),
         .result(pc_jump));
+        
+    Branch_Controller BC(.*,.func3(instruction[14:12]));
     
     Program_Counter PC(
         .*,
@@ -50,7 +52,8 @@ module RISCV_top(
                     .op2(alu_src?imm:rdata2),
                     .aluctrl(alu_ctrl),
                     .result(alu_out),
-                    .zero(zero));                
+                    .zero(zero),
+                    .less(less));                
      
       Data_memory RAM(.clk(clk),
                       .resetn(resetn),

@@ -10,7 +10,17 @@ module alu_control (
     always_comb begin
         case (alu_op)
             2'b00: alu_ctrl = 4'b0000; // ADD for I-type and Load/Store address calculation
-            2'b01: alu_ctrl = 4'b1000; // SUB for Branch instructions
+            2'b01: begin  //  Branch instructions
+                case (fun3)
+                    3'b000: alu_ctrl = 4'b1000; // beq
+                    3'b001: alu_ctrl = 4'b1000; // bne
+                    3'b100: alu_ctrl = 4'b0010; // blt
+                    3'b101: alu_ctrl = 4'b0010; // bge
+                    3'b110: alu_ctrl = 4'b0011; // bltu
+                    3'b111: alu_ctrl = 4'b0011; //bgeu
+                    default:alu_ctrl = 4'b0000;
+                    endcase 
+                    end  
             2'b10: begin
                 case ({fun7[5], fun3})
                     4'b0000: alu_ctrl = 4'b0000; // ADD

@@ -73,7 +73,8 @@ module control(
                 alu_src = 1;
                 branch = 0;
                 Upper_imm = 1;
-                end      
+                end
+                      
                 endcase
                 end
 endmodule
