@@ -70,7 +70,19 @@ module control(
                 pc_return = 0;
                 jump = 0;
                 end
-          7'b0110111: begin // U-type auipc
+          7'b0110111: begin // U-type lui
+                reg_write = 1;
+                mem_write = 0;
+                alu_op = 2'b00;
+                mem_to_reg = 0;
+                alu_src = 1;
+                branch = 0;
+                Upper_imm = 0;
+                pc_sel = 0;
+                pc_return = 0;
+                jump = 0;
+                end
+          7'b0010111: begin // U-type auipc
                 reg_write = 1;
                 mem_write = 0;
                 alu_op = 2'b00;
@@ -82,22 +94,10 @@ module control(
                 pc_return = 0;
                 jump = 0;
                 end
-          7'b0010111: begin // U-type lui
-                reg_write = 1;
-                mem_write = 0;
-                alu_op = 2'b00;
-                mem_to_reg = 0;
-                alu_src = 1;
-                branch = 0;
-                Upper_imm = 0;
-                pc_sel = 0;
-                pc_return = 0;
-                jump = 0;
-                end
            7'b1101111: begin 
                 reg_write = 1;
                 mem_write = 0;
-                alu_op = 2'b10;
+                alu_op = 2'b00;
                 mem_to_reg = 0;
                 alu_src = 1;
                 branch = 0;
@@ -109,7 +109,7 @@ module control(
             7'b1100111: begin 
                 reg_write = 1;
                 mem_write = 0;
-                alu_op = 2'b10;
+                alu_op = 2'b00;
                 mem_to_reg = 0;
                 alu_src = 1;
                 branch = 0;
