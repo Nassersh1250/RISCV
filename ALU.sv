@@ -45,6 +45,6 @@ module ALU(
        //     zero = 1;
        // else 
         //    zero = 0;
-        assign zero = (result==0);
+        zero = (result==0);
     end
 endmodule
